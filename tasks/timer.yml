@@ -1,4 +1,12 @@
 ---
+- name: '{{ launchd_timer_name }} Timer | Create logs folder'
+  file:
+    path:  '{{ launchd_timer_log_folder_path }}'
+    owner: '{{ launchd_timer_user }}'
+    group: '{{ launchd_timer_group }}'
+    state: 'directory'
+    mode:  0755
+
 - name: '{{ launchd_timer_name }} Timer | Create launchd file'
   template:
     src: 'launchd.plist.j2'
