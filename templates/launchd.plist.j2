@@ -28,9 +28,17 @@
 	<key>TimeOut</key>
 	<integer>{{ launchd_timer_timeout_sec }}</integer>
 	<key>RunAtLoad</key>
-	{% if launchd_timer_start_on_boot %}<true/>{% else %}<true/>{% endif %}
+{% if launchd_timer_start_on_boot %}
+	<true/>
+{% else %}
+	<false/>
+{% endif %}
 	<key>KeepAlive</key>
-	{% if launchd_timer_keep_alive %}<true/>{% else %}<true/>{% endif %}
+{% if launchd_timer_keep_alive %}
+	<true/>
+{% else %}
+	<false/>
+{% endif %}
 {% if launchd_timer_environment != {} %}
 	<key>EnvironmentVariables</key>
 	<dict>
