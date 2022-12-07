@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>{{ launchd_timer_name }}</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>{{ launchd_timer_script_path }}</string>
+{% for arg in launchd_timer_script_args %}
+		<string>{{ arg }}</string>
+{% endfor %}
+	</array>
+	<key>WorkingDirectory</key>
+    <string>{{ launchd_timer_work_dir }}</string>
+	<key>UserName</key>
+	<string>{{ launchd_timer_user }}</string>
+	<key>GroupName</key>
+	<string>{{ launchd_timer_group }}</string>
+	<key>StandardErrorPath</key>
+	<string>{{ launchd_timer_log_stderr_path }}</string>
+	<key>StandardOutPath</key>
+	<string>{{ launchd_timer_log_stdout_path }}</string>
+	<key>StartInterval</key>
+	<integer>{{ launchd_timer_frequency }}</integer>
+	<key>TimeOut</key>
+	<integer>{{ launchd_timer_timeout_sec }}</integer>
+	<key>RunAtLoad</key>
+	{% if launchd_timer_start_on_boot %}<true/>{% else %}<true/>{% endif %}
+	<key>KeepAlive</key>
+	{% if launchd_timer_keep_alive %}<true/>{% else %}<true/>{% endif %}
+{% if launchd_timer_environment != {} %}
+	<key>EnvironmentVariables</key>
+	<dict>
+{% for key, val in launchd_timer_environment.items() %}
+		<key>{{ key }}</key>
+		<string>{{ val }}</string>
+{% endfor %}
+	</dict>
+{% endif %}
+</dict>
+</plist>

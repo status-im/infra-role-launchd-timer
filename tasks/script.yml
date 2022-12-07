@@ -1,0 +1,19 @@
+---
+- name: '{{ launchd_timer_name }} Timer | Create script file'
+  copy:
+    dest: '{{ launchd_timer_script_path }}'
+    content: '{{ launchd_timer_script_content }}'
+    owner: '{{ launchd_timer_user }}'
+    group: '{{ launchd_timer_group }}'
+    mode: 0710
+
+- name: '{{ launchd_timer_name }} Timer | Stat script file'
+  stat:
+    path: '{{ launchd_timer_script_path }}'
+  register: launchd_timer_script
+
+- name: '{{ launchd_timer_name }} Timer | Verify script exists'
+  assert:
+    that: launchd_timer_script.stat.exists
+    fail_msg: 'Script file for timer does not exist!'
+    quiet: true

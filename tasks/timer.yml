@@ -1,0 +1,15 @@
+---
+- name: '{{ launchd_timer_name }} Timer | Create launchd file'
+  template:
+    src: 'launchd.plist.j2'
+    dest: '{{ launchd_timer_plist_path }}/{{ launchd_timer_name }}.plist'
+    owner: '{{ launchd_timer_plist_owner }}'
+    group: '{{ launchd_timer_plist_group }}'
+    mode: 0644
+  register: launchd_plist
+
+- name: '{{ launchd_timer_name }} Timer | Start or Reload service'
+  when: launchd_plist.changed
+  community.general.launchd:
+    name: '{{ launchd_timer_name }}'
+    state: '{{ launchd_timer_start_on_creation | ternary("started", "reloaded") }}'

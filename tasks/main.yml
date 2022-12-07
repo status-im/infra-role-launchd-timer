@@ -1,0 +1,5 @@
+---
+- include_tasks: script.yml
+  when: launchd_timer_script_content is not none
+- include_tasks: timer.yml
+- include_tasks: check.yml

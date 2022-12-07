@@ -1,0 +1,11 @@
+---
+- name: Create Consul service definition
+  include_role: name=consul-service
+  vars:
+    consul_config_name: '{{ launchd_timer_consul_service_id }}'
+    consul_services:
+      - id:   '{{ launchd_timer_consul_service_id }}'
+        name: '{{ launchd_timer_consul_service_name }}'
+        tags: '{{ launchd_timer_consul_tags }}'
+        meta: '{{ launchd_timer_consul_meta }}'
+        address: '{{ launchd_timer_consul_address }}'

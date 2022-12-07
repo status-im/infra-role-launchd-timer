@@ -1,0 +1,47 @@
+---
+launchd_timer_name: ~
+launchd_timer_script_content: ~
+launchd_timer_script_path: '/usr/local/bin/{{ launchd_timer_name | mandatory }}'
+launchd_timer_script_args: []
+launchd_timer_plist_path: '/Library/LaunchDaemons'
+launchd_timer_plist_owner: 'root'
+launchd_timer_plist_group: 'wheel'
+launchd_timer_log_stdout_path: '/var/log/{{ launchd_timer_name }}.out.log'
+launchd_timer_log_stderr_path: '/var/log/{{ launchd_timer_name }}.err.log'
+launchd_timer_user: 'nobody'
+launchd_timer_group: '{{ launchd_timer_user }}'
+launchd_timer_description: 'Timer created by Ansible role.'
+launchd_timer_documentation: 'https://github.com/status-im/infra-role-launchd-timer'
+launchd_timer_enabled: true
+launchd_timer_start_on_boot: false
+launchd_timer_start_on_creation: true
+launchd_timer_keep_alive: false
+launchd_timer_timeout_sec: 60
+launchd_timer_work_dir: '/'
+# https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/10000172i-SW7-SW7
+launchd_timer_frequency: '86400' # 24 hours
+launchd_timer_environment: {}
+# PATH: "/special/path"
+
+# Consul service and check
+launchd_timer_consul_service_name: '{{ launchd_timer_name }}-timer'
+launchd_timer_consul_service_id: '{{ launchd_timer_consul_service_name }}'
+launchd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
+launchd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
+launchd_timer_consul_warning: false
+
+# Tags
+launchd_timer_consul_extra_tags: []
+launchd_timer_consul_default_tags: ['timer']
+launchd_timer_consul_tags: |
+  {{ launchd_timer_consul_default_tags + launchd_timer_consul_extra_tags }}
+
+# Meta
+launchd_timer_consul_extra_meta: {}
+launchd_timer_consul_default_meta:
+  description: '{{ launchd_timer_description }}'
+  documentation: '{{ launchd_timer_documentation }}'
+  frequency: '{{ launchd_timer_frequency }}'
+  script: '{{ launchd_timer_script_path }}'
+launchd_timer_consul_meta: |
+  {{ launchd_timer_consul_default_meta | combine(launchd_timer_consul_extra_meta) }}
