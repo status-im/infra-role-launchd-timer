@@ -10,7 +10,7 @@
 - name: '{{ launchd_timer_name }} Timer | Create launchd file'
   template:
     src: 'launchd.plist.j2'
-    dest: '{{ launchd_timer_plist_path }}/{{ launchd_timer_name }}.plist'
+    dest: '{{ launchd_timer_plist_path }}/{{ launchd_timer_plist_name }}'
     owner: '{{ launchd_timer_plist_owner }}'
     group: '{{ launchd_timer_plist_group }}'
     mode: 0644

@@ -3,6 +3,7 @@ launchd_timer_name: ~
 launchd_timer_script_content: ~
 launchd_timer_script_path: '/usr/local/bin/{{ launchd_timer_name | mandatory }}'
 launchd_timer_script_args: ~
+launchd_timer_plist_name: '{{ launchd_timer_name }}.plist'
 launchd_timer_plist_path: '/Library/LaunchDaemons'
 launchd_timer_plist_owner: 'root'
 launchd_timer_plist_group: 'wheel'
