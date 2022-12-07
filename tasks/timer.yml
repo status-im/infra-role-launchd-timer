@@ -12,4 +12,5 @@
   when: launchd_plist.changed
   community.general.launchd:
     name: '{{ launchd_timer_name }}'
+    enabled: '{{ launchd_timer_enabled }}'
     state: '{{ launchd_timer_start_on_creation | ternary("started", "reloaded") }}'
