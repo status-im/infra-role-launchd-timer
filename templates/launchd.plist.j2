@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>Label</key>
@@ -13,20 +13,6 @@
 {% endfor %}
 {% endif %}
 	</array>
-	<key>WorkingDirectory</key>
-	<string>{{ launchd_timer_work_dir }}</string>
-	<key>UserName</key>
-	<string>{{ launchd_timer_user }}</string>
-	<key>GroupName</key>
-	<string>{{ launchd_timer_group }}</string>
-	<key>StandardErrorPath</key>
-	<string>{{ launchd_timer_log_stderr_path }}</string>
-	<key>StandardOutPath</key>
-	<string>{{ launchd_timer_log_stdout_path }}</string>
-	<key>StartInterval</key>
-	<integer>{{ launchd_timer_frequency }}</integer>
-	<key>TimeOut</key>
-	<integer>{{ launchd_timer_timeout_sec }}</integer>
 	<key>RunAtLoad</key>
 {% if launchd_timer_start_on_boot %}
 	<true/>
@@ -39,6 +25,20 @@
 {% else %}
 	<false/>
 {% endif %}
+	<key>StandardErrorPath</key>
+	<string>{{ launchd_timer_log_stderr_path }}</string>
+	<key>StandardOutPath</key>
+	<string>{{ launchd_timer_log_stdout_path }}</string>
+	<key>StartInterval</key>
+	<integer>{{ launchd_timer_frequency }}</integer>
+	<key>TimeOut</key>
+	<integer>{{ launchd_timer_timeout_sec }}</integer>
+	<key>UserName</key>
+	<string>{{ launchd_timer_user }}</string>
+	<key>GroupName</key>
+	<string>{{ launchd_timer_group }}</string>
+	<key>WorkingDirectory</key>
+	<string>{{ launchd_timer_work_dir }}</string>
 {% if launchd_timer_environment != {} %}
 	<key>EnvironmentVariables</key>
 	<dict>
