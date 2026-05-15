@@ -31,8 +31,6 @@ launchd_timer_consul_service_id: '{{ launchd_timer_consul_service_name }}'
 launchd_timer_consul_check_path: '/usr/local/bin/check-timer-status.sh'
 launchd_timer_consul_address: '{{ ansible_local.wireguard.vpn_ip }}'
 launchd_timer_consul_warning: false
-
-# Tags
 launchd_timer_consul_extra_tags: []
 launchd_timer_consul_default_tags: ['timer']
 launchd_timer_consul_tags: |
