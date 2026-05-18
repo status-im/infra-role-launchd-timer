@@ -16,7 +16,7 @@
         meta:    '{{ launchd_timer_consul_meta }}'
         address: '{{ launchd_timer_consul_address }}'
         checks:
-          - name: '{{ beacon_node_consul_service_name }}-rest-health'
+          - name: '{{ launchd_timer_consul_service_name }}-rest-health'
             type: 'script'
             script: >-
               {{ launchd_timer_consul_check_path }}
