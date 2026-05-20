@@ -71,6 +71,7 @@ function fail { [[ "${WARNING}" == 1 ]] && exit 1 || exit 2; }
 [[ "${DISABLED}" -eq 1 ]] && exit 0
 
 [[ "${JOB_STATUS}" != "LOADED" ]]             && fail
-[[ "${JOB_SWITCH}" == "DISABLED" ]]           && fail
+[[ "${JOB_SWITCH}" != "ENABLED" ]]            && fail
+[[ "${JOB_HEALTH}" == "exited" ]]             && fail
 [[ "${LAST_EXIT_CODE}" == "(never exited)" ]] && exit 0
 [[ "${LAST_EXIT_CODE}" != "0" ]]              && fail
