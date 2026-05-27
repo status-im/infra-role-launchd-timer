@@ -75,3 +75,5 @@ function fail { [[ "${WARNING}" == 1 ]] && exit 1 || exit 2; }
 [[ "${JOB_HEALTH}" == "exited" ]]             && fail
 [[ "${LAST_EXIT_CODE}" == "(never exited)" ]] && exit 0
 [[ "${LAST_EXIT_CODE}" != "0" ]]              && fail
+
+exit 0
