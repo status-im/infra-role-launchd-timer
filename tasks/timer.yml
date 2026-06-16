@@ -16,6 +16,10 @@
     mode: 0644
   register: launchd_plist
 
+# NOTE: community.general.launchd rewrites the plist and forces RunAtLoad
+# based on `enabled`, overwriting any RunAtLoad=false set via template.
+# https://github.com/ansible-collections/community.general/issues/10414
+# TODO: replace with launchctl bootout/bootstrap to respect template values.
 - name: '{{ launchd_timer_name }} Timer | Start or Reload service'
   when: launchd_plist.changed
   community.general.launchd:

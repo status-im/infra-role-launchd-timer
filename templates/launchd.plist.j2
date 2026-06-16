@@ -29,8 +29,31 @@
 	<string>{{ launchd_timer_log_stderr_path }}</string>
 	<key>StandardOutPath</key>
 	<string>{{ launchd_timer_log_stdout_path }}</string>
+{% if launchd_timer_start_calendar_interval %}
+	<key>StartCalendarInterval</key>
+{% if launchd_timer_start_calendar_interval is mapping %}
+	<dict>
+{% for key, val in launchd_timer_start_calendar_interval.items() %}
+		<key>{{ key }}</key>
+		<integer>{{ val }}</integer>
+{% endfor %}
+	</dict>
+{% else %}
+	<array>
+{% for entry in launchd_timer_start_calendar_interval %}
+		<dict>
+{% for key, val in entry.items() %}
+			<key>{{ key }}</key>
+			<integer>{{ val }}</integer>
+{% endfor %}
+		</dict>
+{% endfor %}
+	</array>
+{% endif %}
+{% else %}
 	<key>StartInterval</key>
 	<integer>{{ launchd_timer_frequency }}</integer>
+{% endif %}
 	<key>TimeOut</key>
 	<integer>{{ launchd_timer_timeout_sec }}</integer>
 	<key>UserName</key>

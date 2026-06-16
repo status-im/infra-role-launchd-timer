@@ -17,6 +17,7 @@ launchd_timer_documentation: 'https://github.com/status-im/infra-role-launchd-ti
 launchd_timer_enabled: true
 launchd_timer_start_on_boot: false
 launchd_timer_start_on_creation: true
+launchd_timer_start_calendar_interval: {}
 launchd_timer_keep_alive: false
 launchd_timer_timeout_sec: 60
 launchd_timer_work_dir: '/'

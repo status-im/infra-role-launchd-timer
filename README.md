@@ -17,7 +17,36 @@ launchd_timer_script_content: |
   #!/usr/bin/env bash
   echo "My Timer Script!"
 ```
-The `frequency` accepts seconds for `StartInterval`. There is no support for using `StartCalendarInterval` yet.
+
+The `frequency` accepts seconds for `StartInterval`.
+
+## Scheduling on a Calendar Interval
+
+Alternatively, you can schedule the timer on a calendar interval using
+`launchd_timer_start_calendar_interval`. When set, it takes precedence over
+`launchd_timer_frequency` (which is then ignored). It maps directly to launchd's
+[`StartCalendarInterval`](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html)
+and accepts the keys `Minute`, `Hour`, `Day`, `Weekday`, `Month`
+(any omitted key means "every"):
+
+```yml
+# Run every Monday at 03:00
+launchd_timer_start_calendar_interval:
+  Weekday: 1
+  Hour: 3
+  Minute: 0
+```
+
+You can also pass a list of dicts for multiple schedules:
+
+```yml
+launchd_timer_start_calendar_interval:
+  - { Weekday: 1, Hour: 3, Minute: 0 }
+  - { Weekday: 4, Hour: 3, Minute: 0 }
+```
+
+**Note:** if the machine is asleep at the scheduled time the job runs on wake,
+but if it is powered off the run is skipped until the next scheduled time.
 
 ## Startup and Restarts
 
