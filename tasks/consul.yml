@@ -18,6 +18,7 @@
         checks:
           - name: '{{ launchd_timer_consul_service_name }}-rest-health'
             type: 'script'
+            timeout: '{{ launchd_timer_timeout_sec }}'
             script: >-
               {{ launchd_timer_consul_check_path }}
               {%- if launchd_timer_consul_warning %} --warning{% endif %}
